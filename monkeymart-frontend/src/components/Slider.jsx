@@ -8,7 +8,7 @@ export default function Slider({ imgArr }) {
   useEffect(() => {
     const intervalId = setInterval(() => {
       showNext();
-    }, 4000);
+    }, 8000);
 
     return () => {
       clearInterval(intervalId);
