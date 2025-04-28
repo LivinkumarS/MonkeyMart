@@ -1,0 +1,31 @@
+@font-face {
+  font-family: inters;
+  src: url("/fonts/Inter_18pt-Regular.ttf");
+}
+
+@font-face {
+  font-family: playfair;
+  src: url("/fonts/Playfair_9pt-Regular.ttf");
+}
+
+@font-face {
+  font-family: bangers;
+  src: url("/fonts/Bangers-Regular.ttf");
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
+  font-family: inters;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: playfair;
+}
