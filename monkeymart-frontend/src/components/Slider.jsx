@@ -1,9 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { HiArrowLeft, HiArrowRight } from "react-icons/hi";
 import { GoDot, GoDotFill } from "react-icons/go";
 
-export default function Slider({imgArr}) {
+export default function Slider({ imgArr }) {
   const [slideInd, setSlideInd] = useState(0);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      showNext();
+    }, 4000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
 
   let startX = 0;
   let endX = 0;
@@ -26,20 +36,22 @@ export default function Slider({imgArr}) {
   };
 
   const showPrev = () => {
-    if (slideInd > 0) setSlideInd((prev) => prev - 1);
-    else setSlideInd(imgArr.length - 1);
+    setSlideInd((prev) => {
+      return prev > 0 ? prev - 1 : imgArr.length - 1;
+    });
   };
 
   const showNext = () => {
-    if (slideInd < imgArr.length - 1) setSlideInd((prev) => prev + 1);
-    else setSlideInd(0);
+    setSlideInd((prev) => {
+      return prev < imgArr.length - 1 ? prev + 1 : 0;
+    });
   };
 
   return (
     <div
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
-      className="carousel-container select-none w-full m-auto max-w-[800px] rounded-xl aspect-[16/9] sm:aspect-[4/2] md:aspect-[2/1] lg:aspect-[5/2] xl:aspect-[2/1] max-h-[1000px] relative flex gap-0 overflow-hidden"
+      className="carousel-container select-none w-full m-auto rounded-xl aspect-[16/9] sm:aspect-[4/2] md:aspect-[2/1] lg:aspect-[5/2] xl:aspect-[3/1] max-h-[1000px] relative flex gap-0 overflow-hidden"
     >
       {imgArr.map((ele, ind) => (
         <img
