@@ -4,8 +4,22 @@ import { GoDot, GoDotFill } from "react-icons/go";
 
 export default function Slider({ imgArr }) {
   const [slideInd, setSlideInd] = useState(0);
+  const [loadedImages, setLoadedImages] = useState([]);
   const startX = useRef(0);
   const endX = useRef(0);
+
+  // Preload images
+  useEffect(() => {
+    imgArr.forEach((src, index) => {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => {
+        setLoadedImages((prev) =>
+          prev.includes(index) ? prev : [...prev, index]
+        );
+      };
+    });
+  }, [imgArr]);
 
   const showPrev = useCallback(() => {
     setSlideInd((prev) => (prev > 0 ? prev - 1 : imgArr.length - 1));
@@ -19,7 +33,6 @@ export default function Slider({ imgArr }) {
     const intervalId = setInterval(() => {
       showNext();
     }, 8000);
-
     return () => clearInterval(intervalId);
   }, [showNext]);
 
@@ -49,13 +62,24 @@ export default function Slider({ imgArr }) {
       {imgArr.map((ele, ind) => (
         <img
           key={ind}
-          className="w-full h-full object-cover grow-0 shrink-0 transition-all duration-500"
-          style={{ transform: `translateX(${slideInd * -100}%)` }}
           src={ele}
           alt={`Slider Image ${ind + 1}`}
+          loading="eager"
+          onLoad={() => {
+            if (!loadedImages.includes(ind)) {
+              setLoadedImages((prev) => [...prev, ind]);
+            }
+          }}
+          className={`w-full h-full object-cover grow-0 shrink-0 transition-all duration-500 ${
+            loadedImages.includes(ind) ? "opacity-100" : "opacity-0"
+          }`}
+          style={{
+            transform: `translateX(${slideInd * -100}%)`,
+          }}
         />
       ))}
 
+      {/* Next Arrow */}
       <div
         className="p-3 bg-[#0000004f] text-white hidden sm:flex opacity-10 items-center cursor-pointer hover:opacity-100 absolute top-0 bottom-0 right-0"
         onClick={showNext}
@@ -63,6 +87,7 @@ export default function Slider({ imgArr }) {
         <HiArrowRight className="text-[20px] text-white" />
       </div>
 
+      {/* Prev Arrow */}
       <div
         className="p-3 bg-[#0000004f] text-white hidden sm:flex opacity-10 items-center cursor-pointer hover:opacity-100 absolute top-0 bottom-0 left-0"
         onClick={showPrev}

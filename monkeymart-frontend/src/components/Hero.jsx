@@ -16,7 +16,7 @@ export default function Hero() {
       <div>
         <h2 className="text-center text-[20px] sm:text-[30px] font-semibold text-gray-700 flex items-center justify-start sm:my-5 gap-3">
           <span className="w-9 h-1 bg-gray-700 block"></span> Our Best Sellers
-          and
+          
         </h2>
 
         <Link
