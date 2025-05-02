@@ -8,7 +8,7 @@ export default function NewsLetter() {
   };
 
   return (
-    <div className="my-10 sm:my-14 flex flex-col items-center justify-center gap-5">
+    <div className="my-10 sm:my-20 flex flex-col items-center justify-center gap-5">
       <h2 className="text-2xl text-center font-bold">
         Subscribe now & get 10% off
       </h2>
