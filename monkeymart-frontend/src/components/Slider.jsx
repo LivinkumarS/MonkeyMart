@@ -64,7 +64,7 @@ export default function Slider({ imgArr }) {
           key={ind}
           src={ele}
           alt={`Slider Image ${ind + 1}`}
-          loading="eager"
+          loading="lazy"
           onLoad={() => {
             if (!loadedImages.includes(ind)) {
               setLoadedImages((prev) => [...prev, ind]);
