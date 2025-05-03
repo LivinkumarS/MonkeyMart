@@ -1,9 +1,10 @@
-import React, { createContext } from "react";
-import p_img from "../assets/Products/p_img.png"
+import React, { createContext, useState } from "react";
+import p_img from "../assets/Products/p_img.png";
 
 export const ShopContext = createContext();
 
 export default function ShopContextProvider(props) {
+  const [search, setSearch] = useState(false);
   const currency = "₹";
   const delivery_fee = 40;
   const products = [
@@ -685,7 +686,7 @@ export default function ShopContextProvider(props) {
     },
   ];
 
-  const value = { currency, delivery_fee, products };
+  const value = { currency, delivery_fee, products, search, setSearch };
 
   return (
     <ShopContext.Provider value={value}>{props.children}</ShopContext.Provider>

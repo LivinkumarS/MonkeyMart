@@ -1,17 +1,24 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Logo from "../assets/logo.png";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { CiSearch, CiShoppingCart, CiUser } from "react-icons/ci";
 import { HiMenuAlt1 } from "react-icons/hi";
 import { IoMdClose } from "react-icons/io";
+import { ShopContext } from "../context/ShopContext";
 
 export default function Navbar() {
+  const { setSearch } = useContext(ShopContext);
   const [showSideBar, setShowSidebar] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <div className="py-3 flex items-center justify-between gap-5">
-      <Link to={"/"} >
-        <img src={Logo} alt="Logo Image" className="w-[150px] lg:w-[170px] h-auto" />
+      <Link to={"/"}>
+        <img
+          src={Logo}
+          alt="Logo Image"
+          className="w-[150px] lg:w-[170px] h-auto"
+        />
       </Link>
 
       <ul className="hidden sm:flex items-start justify-center gap-4">
@@ -37,7 +44,15 @@ export default function Navbar() {
       </ul>
 
       <div className="flex items-center gap-3 lg:gap-6">
-        <CiSearch className="cursor-pointer text-[25px]" />
+        <CiSearch
+          className="cursor-pointer text-[25px]"
+          onClick={() => {
+            navigate("/collection");
+            setSearch((prev) => {
+              return !prev;
+            });
+          }}
+        />
 
         <Link to={"/cart"} className="relative">
           <CiShoppingCart className="cursor-pointer text-[25px]" />
