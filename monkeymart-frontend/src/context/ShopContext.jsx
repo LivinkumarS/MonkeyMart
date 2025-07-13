@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import p_img from "../assets/Products/p_img.png";
 
 export const ShopContext = createContext();
@@ -7,6 +7,28 @@ export default function ShopContextProvider(props) {
   const [search, setSearch] = useState(false);
   const currency = "₹";
   const delivery_fee = 40;
+  const [cartItems, setCartItems] = useState({});
+
+  const addToCart = async (itemId, size) => {
+    let cartData = structuredClone(cartItems);
+
+    if (cartData[itemId]) {
+      if (cartData[itemId][size]) {
+        cartData[itemId][size] += 1;
+      } else {
+        cartData[itemId][size] = 1;
+      }
+    } else {
+      cartData[itemId] = { [size]: 1 };
+    }
+
+    setCartItems(cartData);
+  };
+
+  useEffect(() => {
+    console.log(cartItems);
+  }, [cartItems]);
+
   const products = [
     {
       _id: "aaaaa",
@@ -14,7 +36,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 100,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Women",
       subCategory: "Topwear",
       sizes: ["S", "M", "L"],
@@ -40,7 +62,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 220,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Kids",
       subCategory: "Topwear",
       sizes: ["S", "L", "XL"],
@@ -53,7 +75,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 110,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Men",
       subCategory: "Topwear",
       sizes: ["S", "M", "XXL"],
@@ -66,7 +88,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 130,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Women",
       subCategory: "Topwear",
       sizes: ["M", "L", "XL"],
@@ -79,7 +101,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 140,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Kids",
       subCategory: "Topwear",
       sizes: ["S", "L", "XL"],
@@ -92,7 +114,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 190,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Men",
       subCategory: "Bottomwear",
       sizes: ["S", "L", "XL"],
@@ -105,7 +127,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 140,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Men",
       subCategory: "Topwear",
       sizes: ["S", "M", "L", "XL"],
@@ -118,7 +140,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 100,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Kids",
       subCategory: "Topwear",
       sizes: ["M", "L", "XL"],
@@ -131,7 +153,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 110,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Men",
       subCategory: "Bottomwear",
       sizes: ["S", "L", "XL"],
@@ -144,7 +166,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 120,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Men",
       subCategory: "Topwear",
       sizes: ["S", "M", "L"],
@@ -157,7 +179,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 150,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Men",
       subCategory: "Topwear",
       sizes: ["S", "M", "L", "XL"],
@@ -170,7 +192,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 130,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Women",
       subCategory: "Topwear",
       sizes: ["S", "M", "L", "XL"],
@@ -183,7 +205,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 160,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Kids",
       subCategory: "Topwear",
       sizes: ["S", "M", "L", "XL"],
@@ -196,7 +218,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 140,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Men",
       subCategory: "Bottomwear",
       sizes: ["S", "M", "L", "XL"],
@@ -209,7 +231,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 170,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Kids",
       subCategory: "Topwear",
       sizes: ["S", "M", "L", "XL"],
@@ -222,7 +244,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 150,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Men",
       subCategory: "Bottomwear",
       sizes: ["S", "M", "L", "XL"],
@@ -235,7 +257,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 180,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Kids",
       subCategory: "Topwear",
       sizes: ["S", "M", "L", "XL"],
@@ -248,7 +270,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 160,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Kids",
       subCategory: "Topwear",
       sizes: ["S", "M", "L", "XL"],
@@ -261,7 +283,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 190,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Women",
       subCategory: "Bottomwear",
       sizes: ["S", "M", "L", "XL"],
@@ -274,7 +296,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 170,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Women",
       subCategory: "Winterwear",
       sizes: ["S", "M", "L", "XL"],
@@ -287,7 +309,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 200,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Women",
       subCategory: "Bottomwear",
       sizes: ["S", "M", "L", "XL"],
@@ -300,7 +322,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 180,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Kids",
       subCategory: "Topwear",
       sizes: ["S", "M", "L", "XL"],
@@ -313,7 +335,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 210,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Kids",
       subCategory: "Topwear",
       sizes: ["S", "M", "L", "XL"],
@@ -326,7 +348,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 190,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Kids",
       subCategory: "Topwear",
       sizes: ["S", "M", "L", "XL"],
@@ -339,7 +361,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 220,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Women",
       subCategory: "Winterwear",
       sizes: ["S", "M", "L", "XL"],
@@ -352,7 +374,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 200,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Kids",
       subCategory: "Topwear",
       sizes: ["S", "M", "L", "XL"],
@@ -365,7 +387,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 230,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Men",
       subCategory: "Winterwear",
       sizes: ["S", "M", "L", "XL"],
@@ -378,7 +400,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 210,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Women",
       subCategory: "Topwear",
       sizes: ["S", "M", "L", "XL"],
@@ -391,7 +413,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 240,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Kids",
       subCategory: "Topwear",
       sizes: ["S", "M", "L", "XL"],
@@ -404,7 +426,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 220,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Men",
       subCategory: "Topwear",
       sizes: ["S", "M", "L", "XL"],
@@ -417,7 +439,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 250,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Men",
       subCategory: "Topwear",
       sizes: ["S", "M", "L", "XL"],
@@ -430,7 +452,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 230,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Kids",
       subCategory: "Topwear",
       sizes: ["S", "M", "L", "XL"],
@@ -443,7 +465,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 260,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Women",
       subCategory: "Topwear",
       sizes: ["S", "M", "L", "XL"],
@@ -456,7 +478,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 240,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Women",
       subCategory: "Winterwear",
       sizes: ["S", "M", "L", "XL"],
@@ -469,7 +491,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 270,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Women",
       subCategory: "Winterwear",
       sizes: ["S", "M", "L", "XL"],
@@ -482,7 +504,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 250,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Women",
       subCategory: "Topwear",
       sizes: ["S", "M", "L", "XL"],
@@ -495,7 +517,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 280,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Men",
       subCategory: "Topwear",
       sizes: ["S", "M", "L", "XL"],
@@ -508,7 +530,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 260,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Men",
       subCategory: "Topwear",
       sizes: ["S", "M", "L", "XL"],
@@ -521,7 +543,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 290,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Men",
       subCategory: "Winterwear",
       sizes: ["S", "M", "L", "XL"],
@@ -534,7 +556,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 270,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Men",
       subCategory: "Topwear",
       sizes: ["S", "M", "L", "XL"],
@@ -547,7 +569,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 300,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Kids",
       subCategory: "Topwear",
       sizes: ["S", "M", "L", "XL"],
@@ -560,7 +582,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 280,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Kids",
       subCategory: "Bottomwear",
       sizes: ["S", "M", "L", "XL"],
@@ -573,7 +595,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 310,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Women",
       subCategory: "Winterwear",
       sizes: ["S", "M", "L", "XL"],
@@ -586,7 +608,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 290,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Men",
       subCategory: "Winterwear",
       sizes: ["S", "M", "L", "XL"],
@@ -599,7 +621,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 320,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Men",
       subCategory: "Winterwear",
       sizes: ["S", "M", "L", "XL"],
@@ -612,7 +634,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 300,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Kids",
       subCategory: "Bottomwear",
       sizes: ["S", "M", "L", "XL"],
@@ -625,7 +647,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 330,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Men",
       subCategory: "Winterwear",
       sizes: ["S", "M", "L", "XL"],
@@ -638,7 +660,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 310,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Kids",
       subCategory: "Bottomwear",
       sizes: ["S", "M", "L", "XL"],
@@ -651,7 +673,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 340,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Kids",
       subCategory: "Bottomwear",
       sizes: ["S", "M", "L", "XL"],
@@ -664,7 +686,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 320,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Women",
       subCategory: "Winterwear",
       sizes: ["S", "M", "L", "XL"],
@@ -677,7 +699,7 @@ export default function ShopContextProvider(props) {
       description:
         "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
       price: 350,
-      image: [p_img],
+      image: [p_img, p_img, p_img],
       category: "Men",
       subCategory: "Winterwear",
       sizes: ["S", "M", "L", "XL"],
@@ -686,7 +708,15 @@ export default function ShopContextProvider(props) {
     },
   ];
 
-  const value = { currency, delivery_fee, products, search, setSearch };
+  const value = {
+    currency,
+    delivery_fee,
+    products,
+    search,
+    setSearch,
+    cartItems,
+    addToCart,
+  };
 
   return (
     <ShopContext.Provider value={value}>{props.children}</ShopContext.Provider>

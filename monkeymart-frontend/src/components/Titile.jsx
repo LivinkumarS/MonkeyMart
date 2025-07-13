@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Titile({ text1, text2 }) {
   return (
-    <div className="inline-flex gap-2 items-center mb-3">
+    <div className="inline-flex gap-2 items-center mb-3 text-lg sm:text-3xl">
       <p className="w-8 sm:w-12 h-[1px] sm:h-[2px] bg-gray-700"></p>
       <p className="text-gray-500">
         {text1}

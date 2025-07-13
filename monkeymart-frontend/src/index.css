@@ -29,3 +29,7 @@ h5,
 h6 {
   font-family: playfair;
 }
+
+::-webkit-scrollbar{
+  display: none;
+}

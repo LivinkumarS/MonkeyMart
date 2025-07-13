@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import Logo from "../assets/logo.png";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { CiSearch, CiShoppingCart, CiUser } from "react-icons/ci";
 import { HiMenuAlt1 } from "react-icons/hi";
 import { IoMdClose } from "react-icons/io";
@@ -10,6 +10,7 @@ export default function Navbar() {
   const { setSearch } = useContext(ShopContext);
   const [showSideBar, setShowSidebar] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   return (
     <div className="py-3 flex items-center justify-between gap-5">
@@ -49,7 +50,7 @@ export default function Navbar() {
           onClick={() => {
             navigate("/collection");
             setSearch((prev) => {
-              return !prev;
+              return location.pathname === "/collection" ? !prev : true;
             });
           }}
         />

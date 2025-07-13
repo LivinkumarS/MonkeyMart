@@ -15,7 +15,7 @@ export default function LatestCollections() {
 
   return (
     <div className="my-5 md:my-10">
-      <div className="text-center py-8 text-xl md:text-3xl">
+      <div className="text-center py-4 sm:py-8 text-xl md:text-3xl">
         <Titile text1={"LATEST "} text2={"COLLECTIONS"} />
         <p className="text-gray-700 text-sm text-center">
           Outfit your ambition with our latest arrivals — styles made to move,
