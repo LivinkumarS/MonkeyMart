@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { ShopContext } from "../context/ShopContext";
 import { FaStar } from "react-icons/fa";
 import RelatedProducts from "../components/RelatedProducts";
+import { toast } from "sonner";
 
 export default function Product() {
   const { productId } = useParams();
@@ -18,6 +19,9 @@ export default function Product() {
       })
     );
   };
+
+  
+
 
   useEffect(() => {
     fetchProductData();
@@ -41,6 +45,7 @@ export default function Product() {
                 key={ind}
                 className="w-[24%] sm:w-full sm:mb-3 flex-shrink-0 cursor-pointer"
                 alt={`Product Image${ind}`}
+                onClick={()=>{setImage(productData.image[ind])}}
               />
             ))}
           </div>
@@ -92,7 +97,7 @@ export default function Product() {
 
             <button
               onClick={() => {
-                size?addToCart(productData._id, size):alert("Please Select The SIZE")
+                size?addToCart(productData._id, size):toast.warning("Please Select The SIZE")
               }}
               className="bg-black text-white text-md font-thin px-8 py-2 mt-5 cursor-pointer w-fit"
             >

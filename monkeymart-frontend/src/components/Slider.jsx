@@ -21,7 +21,7 @@ export default function Slider({ imgArr }) {
     }, 8000);
 
     return () => clearInterval(intervalId);
-  }, [showNext]);
+  }, []);
 
   const handleTouchStart = (e) => {
     startX.current = e.touches[0].clientX;

@@ -7,7 +7,7 @@ import { IoMdClose } from "react-icons/io";
 import { ShopContext } from "../context/ShopContext";
 
 export default function Navbar() {
-  const { setSearch } = useContext(ShopContext);
+  const { setSearch, getCartCount } = useContext(ShopContext);
   const [showSideBar, setShowSidebar] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -59,7 +59,7 @@ export default function Navbar() {
           <CiShoppingCart className="cursor-pointer text-[25px]" />
 
           <p className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px] ">
-            9
+            {getCartCount()}
           </p>
         </Link>
 

@@ -25,6 +25,20 @@ export default function ShopContextProvider(props) {
     setCartItems(cartData);
   };
 
+  const getCartCount = () => {
+    let count = 0;
+    for (let items in cartItems) {
+      for (let item in cartItems[items]) {
+        try {
+          if (cartItems[items][item] > 0) {
+            count += cartItems[items][item];
+          }
+        } catch (error) {}
+      }
+    }
+    return count
+  };
+
   useEffect(() => {
     console.log(cartItems);
   }, [cartItems]);
@@ -716,6 +730,7 @@ export default function ShopContextProvider(props) {
     setSearch,
     cartItems,
     addToCart,
+    getCartCount,
   };
 
   return (
