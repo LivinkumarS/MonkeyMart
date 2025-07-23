@@ -36,12 +36,19 @@ export default function ShopContextProvider(props) {
         } catch (error) {}
       }
     }
-    return count
+    return count;
   };
 
-  useEffect(() => {
-    console.log(cartItems);
-  }, [cartItems]);
+  const updateQuantity = (itemId, size, quantity) => {
+    let cartData = structuredClone(cartItems);
+    if (quantity === 0) {
+      delete cartData[itemId][size];
+      setCartItems(cartData);
+      return;
+    }
+    cartData[itemId][size] = quantity;
+    setCartItems(cartData);
+  };
 
   const products = [
     {
@@ -722,6 +729,8 @@ export default function ShopContextProvider(props) {
     },
   ];
 
+  console.log(cartItems);
+
   const value = {
     currency,
     delivery_fee,
@@ -731,6 +740,7 @@ export default function ShopContextProvider(props) {
     cartItems,
     addToCart,
     getCartCount,
+    updateQuantity,
   };
 
   return (

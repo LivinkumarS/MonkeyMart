@@ -4,7 +4,8 @@ import Titile from "../components/Titile";
 import { CiTrash } from "react-icons/ci";
 
 export default function Cart() {
-  const { products, currency, cartItems } = useContext(ShopContext);
+  const { products, currency, cartItems, updateQuantity } =
+    useContext(ShopContext);
 
   const [cartData, setCartData] = useState([]);
 
@@ -29,8 +30,6 @@ export default function Cart() {
       </div>
       <div>
         {cartData.map((item, ind) => {
-          console.log(products);
-
           const productData = products.find((product) => {
             return product._id === item._id;
           });
@@ -51,14 +50,47 @@ export default function Cart() {
                       {currency}
                       {productData.price}
                     </p>
-                    <p className="px-2 sm:px-3 sm:py-1 border bg-gray-200">{item.size}</p>
+                    <p className="px-2 sm:px-3 sm:py-1 border bg-gray-200">
+                      {item.size}
+                    </p>
                   </div>
                 </div>
-
               </div>
-                <input className="border max-w-10 sm:max-w-20 px-1 sm:px-2 py-1" type="number" min={1} defaultValue={1} />
+              <div className="flex flex-col sm:flex-row items-center gap-2">
+                <button
+                  className="px-3 sm:py-1 bg-gray-200 rounded"
+                  onClick={() => {
+                    if (item.quantity > 1) {
+                      updateQuantity(item._id, item.size, item.quantity - 1);
+                    }
+                  }}
+                >
+                  −
+                </button>
 
-                <CiTrash className=" cursor-pointer text-2xl"/>
+                <input
+                  className="w-10 text-center border px-0 py-0"
+                  type="number"
+                  value={item.quantity}
+                  readOnly 
+                />
+
+                <button
+                  className="px-3 sm:py-1 bg-gray-200 rounded"
+                  onClick={() => {
+                    updateQuantity(item._id, item.size, item.quantity + 1);
+                  }}
+                >
+                  +
+                </button>
+              </div>
+
+              <CiTrash
+                onClick={() => {
+                  updateQuantity(item._id, item.size, 0);
+                }}
+                className=" cursor-pointer text-2xl"
+              />
             </div>
           );
         })}
