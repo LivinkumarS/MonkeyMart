@@ -729,7 +729,27 @@ export default function ShopContextProvider(props) {
     },
   ];
 
-  console.log(cartItems);
+  const getCartAmount = () => {
+    let totalAmount = 0;
+    for (let items in cartItems) {
+      let itemInfo = products.find((product) => {
+        return product._id === items;
+      });
+      
+
+      for (let item in cartItems[items]) {
+        try {
+          if (cartItems[items][item] > 0)
+            totalAmount += itemInfo.price * cartItems[items][item];
+        } catch (err) {
+          console.log(err);
+          
+        }
+      }
+    }
+    
+    return totalAmount;
+  };
 
   const value = {
     currency,
@@ -741,6 +761,7 @@ export default function ShopContextProvider(props) {
     addToCart,
     getCartCount,
     updateQuantity,
+    getCartAmount
   };
 
   return (

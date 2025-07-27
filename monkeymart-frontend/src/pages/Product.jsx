@@ -20,9 +20,6 @@ export default function Product() {
     );
   };
 
-  
-
-
   useEffect(() => {
     fetchProductData();
   }, [productId, products]);
@@ -45,7 +42,9 @@ export default function Product() {
                 key={ind}
                 className="w-[24%] sm:w-full sm:mb-3 flex-shrink-0 cursor-pointer"
                 alt={`Product Image${ind}`}
-                onClick={()=>{setImage(productData.image[ind])}}
+                onClick={() => {
+                  setImage(productData.image[ind]);
+                }}
               />
             ))}
           </div>
@@ -97,7 +96,12 @@ export default function Product() {
 
             <button
               onClick={() => {
-                size?addToCart(productData._id, size):toast.warning("Please Select The SIZE")
+                if (size) {
+                  addToCart(productData._id, size);
+                  toast.success(`${productData.name} ${size} is added to cart!`);
+                } else {
+                  toast.warning("Please Select The SIZE");
+                }
               }}
               className="bg-black text-white text-md font-thin px-8 py-2 mt-5 cursor-pointer w-fit"
             >
