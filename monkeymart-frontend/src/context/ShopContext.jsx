@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import p_img from "../assets/Products/p_img.png";
+import {useNavigate} from 'react-router-dom'
 
 export const ShopContext = createContext();
 
@@ -8,6 +9,7 @@ export default function ShopContextProvider(props) {
   const currency = "₹";
   const delivery_fee = 40;
   const [cartItems, setCartItems] = useState({});
+  const navigate=useNavigate();
 
   const addToCart = async (itemId, size) => {
     let cartData = structuredClone(cartItems);
@@ -752,6 +754,7 @@ export default function ShopContextProvider(props) {
   };
 
   const value = {
+    navigate,
     currency,
     delivery_fee,
     products,

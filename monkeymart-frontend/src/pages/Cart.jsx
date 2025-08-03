@@ -6,7 +6,7 @@ import CartTotal from "../components/CartTotal";
 import { toast } from "sonner";
 
 export default function Cart() {
-  const { products, currency, cartItems, updateQuantity } =
+  const { products, currency, cartItems, updateQuantity, navigate } =
     useContext(ShopContext);
 
   const [cartData, setCartData] = useState([]);
@@ -107,6 +107,15 @@ export default function Cart() {
         <div className="w-full sm:w-[450px]">
           <CartTotal />
         </div>
+      </div>
+
+      <div className="w-full text-end mt-8">
+        <button
+          onClick={() => navigate("/place-order")}
+          className="bg-black text-white px-16 py-3 text-sm"
+        >
+          PLACE ORDER
+        </button>
       </div>
     </div>
   );
