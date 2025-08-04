@@ -13,7 +13,7 @@ const HeroSlider = ({imgArr}) => {
         loop={true}
         autoplay={{ delay: 4000, disableOnInteraction: false }}
         pagination={{ clickable: true }}
-        className="w-full h-[200px] sm:h-[600px]"
+        className="w-full h-[300px] sm:h-[400px]"
       >
         {imgArr.map((slide,ind) => (
           <SwiperSlide key={ind}>
